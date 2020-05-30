@@ -8,7 +8,9 @@ const keys = require('./config/keys')
 const app = express();
 
 app.use(cookieSession({
-    keys: keys.sessionKeys
+    keys: keys.sessionKeys,
+    resave: false,
+    saveUninitialized: false,
 }));
 app.use(passport.initialize());
 app.use(passport.session());
