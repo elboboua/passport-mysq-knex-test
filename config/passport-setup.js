@@ -10,10 +10,10 @@ passport.serializeUser( (user, done) => {
 passport.deserializeUser( async (id, done) => {
     let data = await knex('user').where({id})
     let user = {
-        id,
-        name: data[0].name,
-        email: data[0].email,
-        google_id: data[0].google_id,
+    id,
+    name: data[0].name,
+    email: data[0].email,
+    google_id: data[0].google_id,
     }
     done(null, user);
 })

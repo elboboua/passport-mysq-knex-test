@@ -1,0 +1,38 @@
+<div id="todos"></div>
+
+<script>
+    let todos = document.getElementById('todos');
+
+    fetch('/todo/getTodos')
+    .then((data) => data.json())
+    .then((data) => {
+        
+        for (let i = 0; i < data.length; i++) {
+            let newDiv = document.createElement('div')
+            newDiv.className = 'todo';
+            let name = document.createElement('span');
+            name.textContent = data[i].name + '  ';
+            newDiv.appendChild(name);
+
+            let done = document.createElement('input');
+            done.type = 'checkbox';
+            if (data[i].done) {
+                done.checked = true;
+            }
+            newDiv.appendChild(done);
+
+            todos.appendChild(newDiv)
+        }
+
+        let todo = document.getElementsByClassName('todo');
+
+       console.log(typeof todo) 
+       for (let i = 0; i < todo.length; i++) {
+           todo[i].style.border = "1px solid black";
+       }
+        
+        
+        })
+    
+
+</script>
