@@ -20,7 +20,9 @@
 
 
 
-<div id="todos"></div>
+<div class="container">
+    <ul id="todos" class="list-group list-group-flush"></ul>
+</div>
 
 <script>
     let todos = document.getElementById('todos');
@@ -30,31 +32,40 @@
     .then((data) => {
         
         for (let i = 0; i < data.length; i++) {
-            let newDiv = document.createElement('div')
-            newDiv.className = 'todo';
+            let newDiv = document.createElement('li')
+            newDiv.className = 'todo list-group-item';
+            newDiv.id = "todo" + data[i].id;
             let name = document.createElement('span');
+            let circle = document.createElement('span');
+            circle.innerHTML =                 
+                    '<svg class="bi bi-check-circle" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path class="check" visibility="hidden" fill-rule="evenodd" d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z"/> </svg>   '
+            circle.id = data[i].id;
+            circle.className = 'circle';
+            newDiv.appendChild(circle);
             name.textContent = data[i].name + '  ';
             newDiv.appendChild(name);
-
-            let done = document.createElement('input');
-            done.type = 'checkbox';
-            if (data[i].done) {
-                done.checked = true;
-            }
-            newDiv.appendChild(done);
-
-            todos.appendChild(newDiv)
+            todos.appendChild(newDiv);
         }
 
-        let todo = document.getElementsByClassName('todo');
+        // making the circles interactive
+        let circles = document.getElementsByClassName('circle');
+        let checks = document.getElementsByClassName('check');
 
-       console.log(typeof todo) 
-       for (let i = 0; i < todo.length; i++) {
-           todo[i].style.border = "1px solid black";
-       }
+        for (let i = 0; i < circles.length; i++) {
+            circles[i].onclick = () => {
+                console.log("You clicked the circle with the id: ", circles[i].id)
+                checks[i].style.visibility = 'visible';
+                setTimeout(() => {
+                    let id = circles[i].id
+                    let todo_id = 'todo'+ id
+                    let deleteTodo = document.getElementById(todo_id);
+                    deleteTodo.style.display = 'none';
+                }, 500);
+            }
+        }
+
         
-        
-        })
+    })
     
 
 </script>
