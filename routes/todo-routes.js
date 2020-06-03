@@ -4,12 +4,6 @@ const todoController = require('../controllers/todo-controller');
 
 // we can probably remove the isAuthorized here and put it in the main app.js
 
-// render todo page
-router.get('/', (req, res) => {
-    res.render('todo');
-})
-
-
 // select all todos from user
 router.get('/getTodos', todoController.getTodos);
 

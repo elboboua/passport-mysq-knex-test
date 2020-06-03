@@ -33,6 +33,11 @@ app.engine('hbs', hbs({
     extname: 'hbs'
 }))
 
+// homepage
+app.get('/', (req, res) => {
+    res.render('todo');
+})
+
 // start the server
 app.listen(3000, () => {
     console.log(`Listening on port 3000`);
