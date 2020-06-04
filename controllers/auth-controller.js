@@ -1,5 +1,5 @@
 const isAuthorized = (req, res, next) => {
-    if (req.user == 'undefined') {
+    if (!req.user) {
         res.redirect('/auth/login')
     } else {
         return next() 

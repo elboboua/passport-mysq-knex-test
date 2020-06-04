@@ -5,7 +5,8 @@ const todoRoutes = require('./routes/todo-routes');
 const passport = require('passport');
 const cookieSession = require('cookie-session');
 const keys = require('./config/keys');
-const hbs = require('express-handlebars')
+const hbs = require('express-handlebars');
+const cors = require('cors')
 
 const authController = require('./controllers/auth-controller');
 
@@ -21,10 +22,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+app.use(cors());
 
 
 // routes
-app.use('/auth', authController.isAuthorized,authRoutes);
+app.use('/auth',authRoutes);
 app.use('/todo', authController.isAuthorized,todoRoutes);
 
 // view engine
