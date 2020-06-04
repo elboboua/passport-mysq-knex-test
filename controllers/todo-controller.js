@@ -11,8 +11,7 @@ const addTodo = async (req, res) => {
     if (todo.name) {
         let data = await Todos.insertTodo(todo, req.user.id);
         if (data) {
-            console.log(data);
-            res.sendStatus(200)
+            res.redirect('/')
         }
     } else {
         res.sendStatus(422);

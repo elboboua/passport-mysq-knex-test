@@ -34,7 +34,7 @@ app.engine('hbs', hbs({
 }))
 
 // homepage
-app.get('/', (req, res) => {
+app.get('/', authController.isAuthorized, (req, res) => {
     res.render('todo');
 })
 

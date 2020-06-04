@@ -6,7 +6,7 @@ const Knex = require('knex')
  * @param {Knex} knex 
  */
 const selectTodos = async (user_id) => {
-    let data = await knex('todo').where({user_id});
+    let data = await knex('todo').where({user_id, done: false}).orderBy('id', 'desc');
     data = JSON.parse(JSON.stringify(data));
     return data;
 }
