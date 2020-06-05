@@ -17,6 +17,20 @@ module.exports = {
     seeds: {
       directory: './db/seeds'
     }
+  },
+  production: {
+    client: 'mysql',
+    connection: {
+      port: process.env.REMOTE_PORT,
+      host: process.env.REMOTE_HOST,
+      database: process.env.REMOTE_DATABASE,
+      user: process.env.REMOTE_USERNAME,
+      password: process.env.REMOTE_PASSWORD
+    },
+    pool: {
+      min: 2,
+      max: 10
+    }
   }
 
 };
